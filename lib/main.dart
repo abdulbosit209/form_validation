@@ -62,14 +62,9 @@ class _AppView extends StatelessWidget {
   }
 }
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
-  @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpFormBloc, SignUpFormState>(
@@ -77,24 +72,33 @@ class _SignUpPageState extends State<SignUpPage> {
       listener: (context, state) {
         final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-        if (state.status.isInProgress) {
-          scaffoldMessenger
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(content: Text('Processing Data')),
-            );
-        } else if (state.status.isSuccess) {
-          scaffoldMessenger
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(content: Text('Success')),
-            );
-        } else if (state.status.isFailure) {
-          scaffoldMessenger
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(state.error ?? 'Sumbit error')),
-            );
+        switch (state.status) {
+          case FormzSubmissionStatus.inProgress:
+            scaffoldMessenger
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                const SnackBar(content: Text('Processing Data')),
+              );
+            break;
+
+          case FormzSubmissionStatus.success:
+            scaffoldMessenger
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                const SnackBar(content: Text('Success')),
+              );
+            break;
+
+          case FormzSubmissionStatus.failure:
+            scaffoldMessenger
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text(state.error ?? 'Submit error')),
+              );
+            break;
+
+          default:
+            break;
         }
       },
       builder: (context, state) {

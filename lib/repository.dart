@@ -7,7 +7,7 @@ class EmailAlreadyExistsException implements Exception {
 
 class SumbitException implements Exception {
   @override
-  String toString() => 'Sigh up failure please try again later';
+  String toString() => 'Sign up failure please try again later';
 }
 
 class Repository {
@@ -15,7 +15,7 @@ class Repository {
     if (email.isEmpty) return;
 
     await Future.delayed(const Duration(seconds: 1));
-    if (email == 'abdulbosit@gmail.com') {
+    if (email == 'joe@gmail.com') {
       throw EmailAlreadyExistsException();
     }
   }
