@@ -82,7 +82,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
     emit(
       state.copyWith(
         email: email,
-        isCheckingUsername: email.isValid,
+        isCheckingEmail: email.isValid,
       ),
     );
 
@@ -97,7 +97,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
       return emit(
         state.copyWith(
           email: email,
-          isCheckingUsername: false,
+          isCheckingEmail: false,
         ),
       );
     }

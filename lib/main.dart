@@ -119,7 +119,7 @@ class SignUpPage extends StatelessWidget {
                     decoration: InputDecoration(
                       errorText: state.email.displayError?.message(),
                       labelText: 'Email',
-                      suffix: state.isCheckingUsername
+                      suffix: state.isCheckingEmail
                           ? ConstrainedBox(
                               constraints: BoxConstraints.tight(Size(15, 15)),
                               child: CircularProgressIndicator(strokeWidth: 3),
